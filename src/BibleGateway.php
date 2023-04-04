@@ -1,21 +1,18 @@
 <?php
 
-namespace BenjaminDoe;
+namespace BibleGateway;
 
-/**
-* 
-*/
 class BibleGateway
 {
-	const URL = 'http://www.biblegateway.com';
+	public const URL = 'https://www.biblegateway.com';
 
-	protected $version;
-	protected $reference;
-	protected $text = '';
-	protected $copyright = '';
-	protected $permalink;
+	protected string $version;
+	protected string $reference;
+	protected string $text = '';
+	protected string $copyright = '';
+	protected string $permalink;
 
-	public function __construct($version = 'ESV')
+	public function __construct(string $version = 'RUSV')
 	{
 		$this->version = $version;
 	}
@@ -29,16 +26,15 @@ class BibleGateway
 		return $this->$name;
 	}
 
-	public function __set($name, $value)
+	public function __set(string $name, $value)
 	{
-		if(in_array($name, ['version', 'reference']))
-		{
+		if (in_array($name, ['version', 'reference'])) {
 			$this->$name = $value;
 			$this->searchPassage($this->reference);
 		}
 	}
 
-	public function searchPassage($passage)
+	public function searchPassage(string $passage): self
 	{
 		$this->reference = $passage;
 		$this->text = '';
@@ -71,7 +67,7 @@ class BibleGateway
 		return $this;
 	}
 
-	public function getVerseOfTheDay()
+	public function getVerseOfTheDay(): self
 	{
 		$url = self::URL.'/votd/get/?'.http_build_query(['format' => 'json', 'version' => $this->version]);
 		$votd = json_decode(file_get_contents($url))->votd;

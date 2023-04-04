@@ -1,16 +1,19 @@
 {
-    "name": "benjamindoe/bible-gateway",
+    "name": "pasha-zigzag/bible-gateway",
     "description": "Unofficial Bible Gateway PHP API",
-    "homepage": "https://github.com/benjamindoe/BibleGateway",
+    "homepage": "https://github.com/pasha-zigzag/BibleGateway",
     "keywords": ["bible", "api", "biblegateway"],
     "license": "MIT",
     "require": {
-        "php": "^5.4 || ^7.0"
+        "php": "^7.4",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
-            "BenjaminDoe\\": "src/"
+            "BibleGateway\\": "src/"
         },
-        "files": ["src/BibleGateway.class.php"]
+        "files": ["src/BibleGateway.php"]
     }
 }
